@@ -2,7 +2,7 @@
 
 Welcome to my personal developer portfolio website! This repository houses a modern, fast, and fully responsive showcase of my skills, projects, and educational journey. Built using the React 18, Vite, Tailwind CSS v3, and Framer Motion stack.
 
-🔗 **Live Portfolio:** [https://github.com/Rameez-ai/portfolio](https://github.com/Rameez-ai/portfolio)
+🔗 **Live Portfolio:** [https://github.com/Rameez-ai/portfolio](https://portfolio-two-dusky-91.vercel.app/)
 
 ---
 
