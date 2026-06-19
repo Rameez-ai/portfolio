@@ -1,0 +1,391 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS Custom Properties ── */
+:root {
+  --bg-primary: #0A0F1C;
+  --bg-secondary: #111827;
+  --accent: #6C63FF;
+  --accent-2: #00D9FF;
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --border: rgba(108, 99, 255, 0.2);
+}
+
+.light {
+  --bg-primary: #F8FAFC;
+  --bg-secondary: #FFFFFF;
+  --accent: #6C63FF;
+  --accent-2: #0EA5E9;
+  --text-primary: #1E293B;
+  --text-secondary: #64748B;
+  --border: rgba(108, 99, 255, 0.15);
+}
+
+/* ── Base Styles ── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-2);
+}
+
+/* ── Selection ── */
+::selection {
+  background: rgba(108, 99, 255, 0.3);
+  color: var(--text-primary);
+}
+
+/* ── Gradient Text ── */
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-animated {
+  background: linear-gradient(
+    90deg,
+    var(--accent),
+    var(--accent-2),
+    var(--accent),
+    var(--accent-2)
+  );
+  background-size: 400% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ── Glassmorphism ── */
+.glass {
+  background: rgba(17, 24, 39, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+}
+
+.light .glass {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* ── Particle Mesh Background ── */
+.particle-mesh {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.particle-mesh .particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: particleDrift 20s linear infinite;
+}
+
+.particle-mesh .particle:nth-child(2n) {
+  width: 3px;
+  height: 3px;
+  background: var(--accent-2);
+  opacity: 0.2;
+  animation-duration: 25s;
+  animation-direction: reverse;
+}
+
+.particle-mesh .particle:nth-child(3n) {
+  width: 1px;
+  height: 1px;
+  opacity: 0.4;
+  animation-duration: 15s;
+}
+
+.particle-mesh .mesh-line {
+  position: absolute;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(108, 99, 255, 0.06),
+    transparent
+  );
+  height: 1px;
+  width: 100%;
+  animation: particleDrift 30s linear infinite;
+}
+
+.particle-mesh .mesh-line:nth-child(2n) {
+  background: linear-gradient(
+    0deg,
+    transparent,
+    rgba(0, 217, 255, 0.04),
+    transparent
+  );
+  height: 100%;
+  width: 1px;
+  animation-duration: 35s;
+}
+
+@keyframes particleDrift {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(10px, -10px); }
+  50% { transform: translate(-5px, -20px); }
+  75% { transform: translate(-10px, -5px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* ── Hexagon Frame ── */
+.hexagon-wrapper {
+  position: relative;
+  width: 320px;
+  height: 320px;
+}
+
+.hexagon-frame {
+  width: 280px;
+  height: 280px;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  overflow: hidden;
+  position: relative;
+}
+
+.hexagon-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.hexagon-border {
+  position: absolute;
+  inset: -4px;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: linear-gradient(135deg, var(--accent), var(--accent-2), var(--accent));
+  background-size: 300% 300%;
+  animation: gradientShift 4s ease infinite;
+  z-index: -1;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ── Circular Progress Ring ── */
+.progress-ring-circle {
+  transition: stroke-dashoffset 1s ease-in-out;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+/* ── Typewriter Cursor ── */
+.typewriter-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  background: var(--accent);
+  margin-left: 4px;
+  animation: blink 1s step-end infinite;
+  vertical-align: text-bottom;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ── Section Heading Underline ── */
+.section-heading::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  border-radius: 2px;
+  margin-top: 12px;
+}
+
+.section-heading-center::after {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── Timeline ── */
+.timeline-line {
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent), var(--accent-2), transparent);
+}
+
+.timeline-node {
+  position: absolute;
+  left: 12px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid var(--bg-primary);
+  box-shadow: 0 0 10px rgba(108, 99, 255, 0.4);
+  z-index: 2;
+}
+
+.light .timeline-node {
+  border-color: var(--bg-primary);
+}
+
+/* ── Toast Notifications ── */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 100;
+  padding: 16px 24px;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  animation: slideInRight 0.4s ease-out;
+}
+
+.toast-success {
+  background: linear-gradient(135deg, #059669, #10b981);
+  color: white;
+}
+
+.toast-error {
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+  color: white;
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* ── Focus Visible ── */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Tech Badge Float ── */
+.tech-badge-float {
+  position: absolute;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+  z-index: 5;
+}
+
+/* ── Glow Effect ── */
+.glow-behind {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(108, 99, 255, 0.15), transparent 70%);
+  filter: blur(40px);
+  z-index: 0;
+}
+
+/* ── Card Hover Effect ── */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(108, 99, 255, 0.15);
+}
+
+/* ── Availability Badge ── */
+.availability-pulse {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #10b981;
+  border-radius: 50%;
+  animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+}
+
+/* ── Hamburger Animation ── */
+.hamburger-line {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger-open .hamburger-line:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger-open .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-open .hamburger-line:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
